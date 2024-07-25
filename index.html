@@ -3,22 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel = "stylesheet" href = "style.css">
-    <link rel="icon" type="image/x-icon" href="wordle-favicon.ico">
-
-    <title>Not Wordle</title>
+    <title>Wordgame</title>
+    <link rel="stylesheet" href="./wordgame.css">
 </head>
-<body id = "indx-body" onload="loadGame()">
+<body id="indx-body" onload="loadGame()">
     <h1>Not Wordle!</h1>
-    <h5>pls no sue NYT</h5>
-    <input id="guess-word" type="text" oninput="makeGuess()">
-    <br><br>
+    <h3>pls no sue NYT</h3>
 
+    <p id = "remain"></p>
+    <input id="guess-word"> <br> <br>
 
-    <!--<button id="submit">Submit</button>-->
-
+    <button onclick = "makeGuess()">Submit</button>
+    <br>
+    <br>
+    
+    <button id="restart" onclick="location.reload()">Restart? (Word will be Different)</button>
+    <br>
+    <br>
+    <button id="restart" onclick="window.close()">Give Up</button>
+    <p id="guess-history">HISTORY:<br></p>
 
     
+
     <script src="./wordgame.js"></script>
 </body>
 </html>
