@@ -27,6 +27,14 @@ function wordsLoaded() {
     console.log(`Loaded ${popularWords.length} popular words and ${allWords.length} dictionary words!`)
 }
 
+function randInt(min, max) {
+    let rand = Math.random();
+    rand = rand * (max - min + 1);
+    rand = rand + min;
+    rand = Math.floor(rand);
+    return rand;
+}
+
 // TODO: copy randInt
 // TODO: write function isWord(word)
 
