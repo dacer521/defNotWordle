@@ -7,7 +7,7 @@ function loadGame() {
         fetch('./popular.txt')
             .then(response => response.text())
             .then(text => {
-                popularWords = text.split("\r\n");
+                popularWords = text.replaceAll("\r", "").split("\n");;
                 popularWords.pop(); // Remove the '' at the end
             })
             .catch(error => {
@@ -16,7 +16,7 @@ function loadGame() {
         fetch("./enable1.txt")
             .then(response => response.text())
             .then(text => {
-                allWords = text.split("\r\n");
+                allWords = text.replaceAll("\r", "").split("\n");
                 allWords.pop(); // Remove the '' at the end
             })
             .catch(error => {
@@ -24,9 +24,15 @@ function loadGame() {
             })]).finally(wordsLoaded);
 }
 
+
+const winSound = document.getElementById("win")
+const correctSound = document.getElementById("correct")
+const wrongSound = document.getElementById("wrong")
+
 let popularWordsSorted = {};
 
 function winGame() {
+    
     alert("Congrats! You win!")
     location.reload()
 }
@@ -60,6 +66,18 @@ function startGame() {
 
     // TODO: reset other game elements (attempts, history, etc.)
 }
+var myConfetti = confetti.create(null, {
+    resize: true,
+    useWorker: true
+});
+
+function spawnConfetti()
+{
+    for (var i = 0; i < 5; i++)
+    {
+        myConfetti({particleCount: 100, spread: 160})
+    }
+}
 
 const guessWord = document.getElementById("guess-word");
 const guessHistory = document.getElementById("guess-history");
@@ -81,25 +99,37 @@ function makeGuess() {
     //the guess is a real word with 5 letters
     numGuesses--
 
+    let pastInWord = [];
+
     for (let i = 0; i < numLetters; i++){
 
         if (guess[i] == secret[i]){
             guessHistory.innerHTML += `<div class = "rightSpot">${guess[i]}</span>`
+            // correctSound.play();
         }
 
-        else if (guess[i] != secret[i] && secret.includes(guess[i])) {
+        else if (guess[i] != secret[i] && secret.includes(guess[i]) && !pastInWord.includes(guess[i])) {
             guessHistory.innerHTML += `<div class = "inWord">${guess[i]}</span>`
+            pastInWord.push(guess[i])
+            // correctSound.play();
+
             
         }
         else{
         guessHistory.innerHTML += `<div class = "letter">${guess[i]}</span>`
+        // wrongSound.play();
+
         }
     }
     guessHistory.innerHTML += `<br>`
     guessWord.value = ""; //clears box
 
     if (guess == secret) {
-        winGame();
+        
+        spawnConfetti()
+        winSound.play();
+        setTimeout(winGame, 100)
+        //winGame();
         return;
     }
 

@@ -5,18 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wordgame</title>
     <link rel="stylesheet" href="./wordgame.css">
+    <link rel="icon" type="image/x-icon" href="wordle-favicon.ico">
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 </head>
 <body id="indx-body" onload="loadGame()">
     <h1>Not Wordle!</h1>
     <h3>pls no sue NYT</h3>
 
+    <audio src="./wrong.mp3" type="audio/mp3" id="wrong"> </audio>
+    <audio src="./correct.mp3" type="audio/mp3" id="correct"> </audio>
+    <audio src = "./win.mp3" type = "audio/mp3" id = "win"> </audio>
+    
     <p id = "remain"></p>
     <input id="guess-word"> <br> <br>
 
     <button onclick = "makeGuess()">Submit</button>
     <br>
     <br>
-    
     <button id="restart" onclick="location.reload()">Restart? (Word will be Different)</button>
     <br>
     <br>
@@ -26,5 +32,6 @@
     
 
     <script src="./wordgame.js"></script>
+    
 </body>
 </html>
